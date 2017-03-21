@@ -1,0 +1,41 @@
+ul#todo-list { list-style: none; }
+
+.todo-list-item { font-size: 1.2em; }
+
+.todo-list-item > select {
+  font-family: 'FontAwesome';
+  width: 4%;
+  border: 1px solid transparent;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-align-last:center;
+  text-overflow: '';
+  background: transparent;
+  padding: 0 5px;
+}
+
+.todo-list-item option { font-family: 'FontAwesome'; }
+
+.todo-list-item > select:hover,
+.todo-list-item > select:focus,
+.todo-list-item > select:active {
+  border: 1px solid $input-border;
+  cursor: pointer;
+}
+
+.todo-list-item > input[type='text'] {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid $input-border;
+  width: 92%;
+  padding: 2px 5px;
+}
+
+.todo-list-item > input[type='text']:hover,
+.todo-list-item > input[type='text']:focus,
+.todo-list-item > input[type='text']:active {
+  border-bottom: 1px solid $input-border;
+}
