@@ -1,33 +1,24 @@
 <template>
     <ul id="todo-list">
-        <li class="todo-list-item" v-for="item in items" v-bind:id="item.id">
+        <li class="todo-list-item" v-for="item in items" v-bind:id="'todo-list-item-' + item.id">
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle"
+                <button class="btn btn-default btn-lg dropdown-toggle"
                         type="button" v-bind:id="'item-' + item.id + '-type'"
-                        data-toggle="dropdown" aria-haspopup="true"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
                         aria-expanded="true">
-                    Dropdown<span class="caret"></span>
+                    <span class="fa" v-html="todoListTypes[item.type].html"></span>
                 </button>
+                <ul class="dropdown-menu" v-bind:aria-labelledby="'item-' + item.id + '-type'">
+                    <li><a href="#" @click="todoSetType(item.id, 0)"><i class="fa fa-circle" aria-hidden="true"></i>Task</a></li>
+                    <li><a href="#" @click="todoSetType(item.id, 1)"><i class="fa fa-times" aria-hidden="true"></i>Task Complete</a></li>
+                    <li><a href="#" @click="todoSetType(item.id, 2)"><i class="fa fa-angle-right" aria-hidden="true"></i>Task Migrated</a></li>
+                    <li><a href="#" @click="todoSetType(item.id, 3)"><i class="fa fa-angle-left" aria-hidden="true"></i>Task Scheduled</a></li>
+                    <li><a href="#" @click="todoSetType(item.id, 4)"><i class="fa fa-circle-o" aria-hidden="true"></i>Event</a></li>
+                    <li><a href="#" @click="todoSetType(item.id, 5)"><i class="fa">-</i>Note</a></li>
+                </ul>
             </div>
 
-            <ul class="dropdown-menu" v-bind:aria-labelledby="'item-' + item.id + '-type'">
-                <ul><a href="#"><!-- value="0" purpose="Task"-->&#xf10c;</a></ul>
-                <ul><a href="#"><!-- value="1" purpose="Task Complete"-->&#xf00d;</a></ul>
-                <ul><a href="#"><!-- value="2" purpose="Task Migrated"-->&#xf060;</a></ul>
-                <ul><a href="#"><!-- value="3" purpose="Task Scheduled"-->&#xf061;</a></ul>
-                <ul><a href="#"><!-- value="4" purpose="Event"-->&#xf10c;</a></ul>
-                <ul><a href="#"><!-- value="5" purpose="Note"-->-</a></ul>
-            </ul>
-            <!--
-            <select v-bind:value="item.type">
-                <option class="type-task" value="0"><!--purpose="Task"-- >&#xf10c;</option>
-                <option class="type-task" value="1"><!--purpose="Task Complete"-- >&#xf00d;</option>
-                <option class="type-task" value="2"><!--purpose="Task Migrated"-- >&#xf060;</option>
-                <option class="type-task" value="3"><!--purpose="Task Scheduled"-- >&#xf061;</option>
-                <option class="type-task" value="4"><!--purpose="Event"-- >&#xf10c;</option>
-                <option class="type-task" value="5"><!--purpose="Note"-- >-</option>
-            </select>
-            -->
             <input type="text" v-bind:value="item.title" />
         </li>
     </ul>
@@ -36,7 +27,7 @@
 <script type="text/babel">
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
         },
         data() {
             return {
@@ -53,8 +44,50 @@
                         title: 'item2',
                         description: 'item 2 is an item'
                     },
-                ]
+                ],
+                todoListTypes: [
+                    {
+                        id: 0,
+                        name: 'Task',
+                        html: '<i class="fa fa-circle" aria-hidden="true"></i>',
+                        char: '&#x111;'
+                    },
+                    {
+                        id: 1,
+                        name: 'Task Complete',
+                        html: '<i class="fa fa-times" aria-hidden="true"></i>',
+                        char: '&#x00d;'
+                    },
+                    {
+                        id: 2,
+                        name: 'Task Migrated',
+                        html: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+                        char: '&#x105;'
+                    },
+                    {
+                        id: 3,
+                        name: 'Task Scheduled',
+                        html: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                        char: '&#x104;'
+                    },
+                    {
+                        id: 4,
+                        name: 'Event',
+                        html: '<i class="fa fa-circle-o" aria-hidden="true"></i>',
+                        char: '&#x10c;'
+                    },
+                    {
+                        id: 5,
+                        name: 'Note',
+                        html: '-'
+                    },
+                ],
+                todoSetType: function(todoID, typeID) {
+                    this.items[todoID].type = typeID;
+                }
             };
         }
     }
+
+
 </script>

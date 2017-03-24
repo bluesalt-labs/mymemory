@@ -16,7 +16,23 @@ ul#todo-list { list-style: none; }
   padding: 0 5px;
 }
 
-.todo-list-item option { font-family: 'FontAwesome'; }
+.todo-list-item > .dropdown { display: inline-block; }
+
+.todo-list-item > .dropdown > button {
+  width: 36px;
+  border-color: transparent;
+  text-align: left;
+}
+
+.todo-list-item > .dropdown > .btn { vertical-align: inherit; }
+
+.todo-list-item > .dropdown > button:hover,
+.todo-list-item > .dropdown > button:active { border-color: $input-border; }
+
+.dropdown-menu i {
+  display: inline-block;
+  width: 25px;
+}
 
 .todo-list-item > select:hover,
 .todo-list-item > select:focus,
@@ -29,7 +45,7 @@ ul#todo-list { list-style: none; }
   border: none;
   outline: none;
   border-bottom: 1px solid transparent;
-  border-left: 1px solid $input-border;
+  /*border-left: 1px solid $input-border;*/
   width: 92%;
   padding: 2px 5px;
 }

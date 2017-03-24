@@ -12115,15 +12115,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     mounted: function mounted() {
@@ -12141,7 +12132,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 type: 2,
                 title: 'item2',
                 description: 'item 2 is an item'
-            }]
+            }],
+            todoListTypes: [{
+                id: 0,
+                name: 'Task',
+                html: '<i class="fa fa-circle" aria-hidden="true"></i>',
+                char: '&#x111;'
+            }, {
+                id: 1,
+                name: 'Task Complete',
+                html: '<i class="fa fa-times" aria-hidden="true"></i>',
+                char: '&#x00d;'
+            }, {
+                id: 2,
+                name: 'Task Migrated',
+                html: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+                char: '&#x105;'
+            }, {
+                id: 3,
+                name: 'Task Scheduled',
+                html: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                char: '&#x104;'
+            }, {
+                id: 4,
+                name: 'Event',
+                html: '<i class="fa fa-circle-o" aria-hidden="true"></i>',
+                char: '&#x10c;'
+            }, {
+                id: 5,
+                name: 'Note',
+                html: '-'
+            }],
+            todoSetType: function todoSetType(todoID, typeID) {
+                this.items[todoID].type = typeID;
+            }
         };
     }
 };
@@ -12161,8 +12185,6 @@ window._ = __webpack_require__(33);
 
 window.$ = window.jQuery = __webpack_require__(8);
 
-__webpack_require__(32);
-
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean
@@ -12170,6 +12192,12 @@ __webpack_require__(32);
  */
 
 window.Vue = __webpack_require__(37);
+
+/**
+ * Twitter Bootstrap
+ */
+
+__webpack_require__(32);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -31775,12 +31803,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('li', {
       staticClass: "todo-list-item",
       attrs: {
-        "id": item.id
+        "id": 'todo-list-item-' + item.id
       }
     }, [_c('div', {
       staticClass: "dropdown"
     }, [_c('button', {
-      staticClass: "btn btn-default dropdown-toggle",
+      staticClass: "btn btn-default btn-lg dropdown-toggle",
       attrs: {
         "type": "button",
         "id": 'item-' + item.id + '-type',
@@ -31788,14 +31816,98 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "aria-haspopup": "true",
         "aria-expanded": "true"
       }
-    }, [_vm._v("\n                Dropdown"), _c('span', {
-      staticClass: "caret"
-    })])]), _vm._v(" "), _c('ul', {
+    }, [_c('span', {
+      staticClass: "fa",
+      domProps: {
+        "innerHTML": _vm._s(_vm.todoListTypes[item.type].html)
+      }
+    })]), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu",
       attrs: {
         "aria-labelledby": 'item-' + item.id + '-type'
       }
-    }, [_vm._m(0, true), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _vm._m(3, true), _vm._v(" "), _vm._m(4, true), _vm._v(" "), _vm._m(5, true)]), _vm._v(" "), _c('input', {
+    }, [_c('li', [_c('a', {
+      attrs: {
+        "href": "#"
+      },
+      on: {
+        "click": function($event) {
+          _vm.todoSetType(item.id, 0)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-circle",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v("Task")])]), _vm._v(" "), _c('li', [_c('a', {
+      attrs: {
+        "href": "#"
+      },
+      on: {
+        "click": function($event) {
+          _vm.todoSetType(item.id, 1)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-times",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v("Task Complete")])]), _vm._v(" "), _c('li', [_c('a', {
+      attrs: {
+        "href": "#"
+      },
+      on: {
+        "click": function($event) {
+          _vm.todoSetType(item.id, 2)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-angle-right",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v("Task Migrated")])]), _vm._v(" "), _c('li', [_c('a', {
+      attrs: {
+        "href": "#"
+      },
+      on: {
+        "click": function($event) {
+          _vm.todoSetType(item.id, 3)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-angle-left",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v("Task Scheduled")])]), _vm._v(" "), _c('li', [_c('a', {
+      attrs: {
+        "href": "#"
+      },
+      on: {
+        "click": function($event) {
+          _vm.todoSetType(item.id, 4)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-circle-o",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v("Event")])]), _vm._v(" "), _c('li', [_c('a', {
+      attrs: {
+        "href": "#"
+      },
+      on: {
+        "click": function($event) {
+          _vm.todoSetType(item.id, 5)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa"
+    }, [_vm._v("-")]), _vm._v("Note")])])])]), _vm._v(" "), _c('input', {
       attrs: {
         "type": "text"
       },
@@ -31804,43 +31916,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })])
   }))
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("-")])])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

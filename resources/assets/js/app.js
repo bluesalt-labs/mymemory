@@ -18,3 +18,4 @@ Vue.component('todolist', require('./components/ToDoList.vue'));
 const app = new Vue({
     el: '#app'
 });
+
