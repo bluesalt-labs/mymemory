@@ -31908,11 +31908,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa"
     }, [_vm._v("-")]), _vm._v("Note")])])])]), _vm._v(" "), _c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (item.title),
+        expression: "item.title"
+      }],
       attrs: {
         "type": "text"
       },
       domProps: {
-        "value": item.title
+        "value": (item.title)
+      },
+      on: {
+        "input": function($event) {
+          if ($event.target.composing) { return; }
+          item.title = $event.target.value
+        }
       }
     })])
   }))

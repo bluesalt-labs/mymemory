@@ -19,7 +19,7 @@
                 </ul>
             </div>
 
-            <input type="text" v-bind:value="item.title" />
+            <input type="text" v-model="item.title" />
         </li>
     </ul>
 </template>
