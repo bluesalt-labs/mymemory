@@ -12105,6 +12105,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     mounted: function mounted() {
@@ -31758,41 +31777,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "id": item.id
       }
-    }, [_c('select', {
-      domProps: {
-        "value": item.type
-      }
-    }, [_c('option', {
-      staticClass: "type-task",
+    }, [_c('div', {
+      staticClass: "dropdown"
+    }, [_c('button', {
+      staticClass: "btn btn-default dropdown-toggle",
       attrs: {
-        "value": "0"
+        "type": "button",
+        "id": 'item-' + item.id + '-type',
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "true"
       }
-    }, [_vm._v("")]), _vm._v(" "), _c('option', {
-      staticClass: "type-task",
+    }, [_vm._v("\n                Dropdown"), _c('span', {
+      staticClass: "caret"
+    })])]), _vm._v(" "), _c('ul', {
+      staticClass: "dropdown-menu",
       attrs: {
-        "value": "1"
+        "aria-labelledby": 'item-' + item.id + '-type'
       }
-    }, [_vm._v("")]), _vm._v(" "), _c('option', {
-      staticClass: "type-task",
-      attrs: {
-        "value": "2"
-      }
-    }, [_vm._v("")]), _vm._v(" "), _c('option', {
-      staticClass: "type-task",
-      attrs: {
-        "value": "3"
-      }
-    }, [_vm._v("")]), _vm._v(" "), _c('option', {
-      staticClass: "type-task",
-      attrs: {
-        "value": "4"
-      }
-    }, [_vm._v("")]), _vm._v(" "), _c('option', {
-      staticClass: "type-task",
-      attrs: {
-        "value": "5"
-      }
-    }, [_vm._v("-")])]), _vm._v(" "), _c('input', {
+    }, [_vm._m(0, true), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._m(2, true), _vm._v(" "), _vm._m(3, true), _vm._v(" "), _vm._m(4, true), _vm._v(" "), _vm._m(5, true)]), _vm._v(" "), _c('input', {
       attrs: {
         "type": "text"
       },
@@ -31801,7 +31804,43 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })])
   }))
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("-")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
