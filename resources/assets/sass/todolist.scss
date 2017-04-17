@@ -1,57 +1,86 @@
-ul#todo-list { list-style: none; }
-
-.todo-list-item { font-size: 1.2em; }
-
-.todo-list-item > select {
-  font-family: 'FontAwesome';
-  width: 4%;
-  border: 1px solid transparent;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-indent: 1px;
-  text-align-last:center;
-  text-overflow: '';
-  background: transparent;
-  padding: 0 5px;
+ul#todo-list {
+  margin-left: -40px;
+  list-style: none;
 }
 
-.todo-list-item > .dropdown { display: inline-block; }
+#todo-list { font-size: 1.2em; }
 
-.todo-list-item > .dropdown > button {
+.todo-list-item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+}
+
+.todo-list-item > .list-btn-container,
+.todo-list-item > .list-text-container {
+  margin: 0;
+  padding: 0;
+  height: $list-item-height;
+  display: inline-block;
+}
+
+.todo-list-item > .list-btn-container { width: 36px; }
+.todo-list-item > .list-text-container { width: 100%; }
+
+.todo-list-item .dropdown,
+.todo-list-item input[type='text'],
+.todo-list-item .btn-delete { display: block; }
+
+.todo-list-item button {
   width: 36px;
+  height: $list-item-height;
   border-color: transparent;
-  text-align: left;
+  text-align: center;
+  padding: 10px 0;
+  margin: 0 1px;
 }
 
-.todo-list-item > .dropdown > .btn { vertical-align: inherit; }
+.todo-list-item .btn { vertical-align: inherit; }
 
-.todo-list-item > .dropdown > button:hover,
-.todo-list-item > .dropdown > button:active { border-color: $input-border; }
+.todo-list-item button:hover,
+.todo-list-item button:active { border-color: $input-border; }
 
 .dropdown-menu i {
   display: inline-block;
   width: 25px;
 }
 
-.todo-list-item > select:hover,
-.todo-list-item > select:focus,
-.todo-list-item > select:active {
-  border: 1px solid $input-border;
-  cursor: pointer;
+.dropdown span.fa,
+#add-item-btn i.fa {
+  display:inline-block;
+  position: relative;
+  text-align:center;
+  width: 34px;
+  height: 14px;
+  margin: 0 auto;
 }
 
-.todo-list-item > input[type='text'] {
+.todo-list-item input[type='text'] {
   border: none;
   outline: none;
   border-bottom: 1px solid transparent;
   /*border-left: 1px solid $input-border;*/
-  width: 92%;
+  width: 100%;
   padding: 2px 5px;
+  height: $list-item-height;
 }
 
-.todo-list-item > input[type='text']:hover,
-.todo-list-item > input[type='text']:focus,
-.todo-list-item > input[type='text']:active {
+.todo-list-item:hover input[type='text'],
+.todo-list-item:focus input[type='text'],
+.todo-list-item:active input[type='text'] {
   border-bottom: 1px solid $input-border;
+}
+
+.todo-list-item .btn-delete { visibility: hidden; }
+
+.todo-list-item:hover .btn-delete,
+.todo-list-item:focus .btn-delete,
+.todo-list-item:active .btn-delete { visibility: visible; }
+
+
+.todo-list-item select:hover,
+.todo-list-item select:focus,
+.todo-list-item select:active {
+  border: 1px solid $input-border;
+  cursor: pointer;
 }

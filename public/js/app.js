@@ -12115,6 +12115,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     mounted: function mounted() {
@@ -12122,6 +12138,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
+            defaults: {
+                type: 0
+            },
             items: [{
                 id: 0,
                 type: 1,
@@ -12165,6 +12184,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }],
             todoSetType: function todoSetType(todoID, typeID) {
                 this.items[todoID].type = typeID;
+            },
+            addTodoItem: function addTodoItem(afterTodoID) {
+                var newItemID;
+
+                if (afterTodoID >= 0) {
+                    // If to do item id is specified, add new item after it
+                    // and shift others after it down
+                    newItemID = afterTodoID + 1;
+                } else {
+                    // otherwise, add to the end of the list
+                    newItemID = this.items.length;
+                }
+
+                // for now, only allow adding to the end of the list
+                // todo: fix this!
+                newItemID = this.items.length; // debug
+                console.log("new item ID is ID # " + newItemID + '.'); // debug
+
+                var newItemType = this.defaults.type;
+
+                // If there is a previous item and it has a type, use that type for the new item.
+                if (this.getPreviousTodoItem(newItemID) > 0) {
+                    newItemType = this.items[this.getPreviousTodoItem(newItemID)].type;
+                }
+
+                this.items.push({
+                    id: newItemID,
+                    type: newItemType
+                });
+
+                this.gotoTodoItem(newItemID);
+            },
+            deleteTodoItem: function deleteTodoItem(todoID) {},
+            // todo: add the ability to drag the order of the items around
+            gotoTodoItem: function gotoTodoItem(todoID) {
+                // Moves cursor to text box for item ID specified
+                // todo: add @keyup.tab="gotoTodoItem(item.id + 1)" to todo items
+                // todo: add @keyup.shift.tab="gotoTodoItem(item.id - 1)" to todo items
+            },
+            getPreviousTodoItem: function getPreviousTodoItem(todoID) {
+                var prevID = todoID - 1;
+                if (!(prevID in this.items)) {
+                    prevID = -1;
+                }
+
+                return prevID;
+            },
+            getNextTodoItem: function getNextTodoItem(todoID) {
+                var nextID = todoID + 1;
+                if (!(nextID in this.items)) {
+                    nextID = -1;
+                }
+
+                return nextID;
             }
         };
     }
@@ -31799,12 +31872,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "todo-list"
     }
-  }, _vm._l((_vm.items), function(item) {
+  }, [_vm._l((_vm.items), function(item) {
     return _c('li', {
       staticClass: "todo-list-item",
       attrs: {
         "id": 'todo-list-item-' + item.id
       }
+    }, [_c('div', {
+      staticClass: "list-btn-container"
     }, [_c('div', {
       staticClass: "dropdown"
     }, [_c('button', {
@@ -31907,7 +31982,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('i', {
       staticClass: "fa"
-    }, [_vm._v("-")]), _vm._v("Note")])])])]), _vm._v(" "), _c('input', {
+    }, [_vm._v("-")]), _vm._v("Note")])])])])]), _vm._v(" "), _c('div', {
+      staticClass: "list-text-container"
+    }, [_c('input', {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -31921,13 +31998,47 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "value": (item.title)
       },
       on: {
+        "keyup": function($event) {
+          if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+          _vm.addTodoItem(item.id)
+        },
         "input": function($event) {
           if ($event.target.composing) { return; }
           item.title = $event.target.value
         }
       }
-    })])
-  }))
+    })]), _vm._v(" "), _c('div', {
+      staticClass: "list-btn-container"
+    }, [_c('button', {
+      staticClass: "btn btn-default btn-lg btn-delete",
+      on: {
+        "click": function($event) {
+          _vm.deleteTodoItem(item.id)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-minus-square-o",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })])])])
+  }), _vm._v(" "), _c('li', {
+    staticClass: "todo-list-item"
+  }, [_c('div', {
+    staticClass: "list-btn-container"
+  }, [_c('button', {
+    staticClass: "btn btn-default btn-lg",
+    on: {
+      "click": function($event) {
+        _vm.addTodoItem()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-plus-square-o",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])])])], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
