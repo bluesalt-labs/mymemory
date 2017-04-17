@@ -2,9 +2,19 @@
 
 Organize your day-to-day thoughts
 
+The develop branch of this application is now running at <https://my-memory.herokuapp.com/>.
+If you would like to try it out, simply register for an account using the "Register" button on
+the right side of the header menu. Please note that with this current testing/development version, 
+changes are not saved and your account may be deleted at any time. 
 
 
-===============================
+# Currently working On...
+Right now I'm developing the basic front-end list interface. 
+
+
+# Licensing
+
+I'm assuming the items below need to be included, so here you go. 
 
 ## MyMemory License
 
