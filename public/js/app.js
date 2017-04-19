@@ -12131,7 +12131,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+// refer to this to figure out a better way to get this done: <https://vuejs.org/v2/guide/list.html> -->
 /* harmony default export */ __webpack_exports__["default"] = {
     mounted: function mounted() {
         console.log('Component mounted.');
@@ -12141,47 +12153,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             defaults: {
                 type: 0
             },
-            items: [{
-                id: 0,
-                type: 1,
-                title: 'item1',
-                description: 'item 1 is an item'
-            }, {
-                id: 1,
-                type: 2,
-                title: 'item2',
-                description: 'item 2 is an item'
-            }],
-            todoListTypes: [{
-                id: 0,
-                name: 'Task',
-                html: '<i class="fa fa-circle" aria-hidden="true"></i>',
-                char: '&#x111;'
-            }, {
-                id: 1,
-                name: 'Task Complete',
-                html: '<i class="fa fa-times" aria-hidden="true"></i>',
-                char: '&#x00d;'
-            }, {
-                id: 2,
-                name: 'Task Migrated',
-                html: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
-                char: '&#x105;'
-            }, {
-                id: 3,
-                name: 'Task Scheduled',
-                html: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-                char: '&#x104;'
-            }, {
-                id: 4,
-                name: 'Event',
-                html: '<i class="fa fa-circle-o" aria-hidden="true"></i>',
-                char: '&#x10c;'
-            }, {
-                id: 5,
-                name: 'Note',
-                html: '-'
-            }],
+            items: {
+                0: {
+                    type: 1,
+                    title: 'item1',
+                    description: 'item 1 is an item'
+                },
+                1: {
+                    type: 2,
+                    title: 'item2',
+                    description: 'item 2 is an item'
+                }
+            },
+            todoListTypes: {
+                0: {
+                    name: 'Task',
+                    html: '<i class="fa fa-circle" aria-hidden="true"></i>',
+                    char: '&#x111;'
+                },
+                1: {
+                    name: 'Task Complete',
+                    html: '<i class="fa fa-times" aria-hidden="true"></i>',
+                    char: '&#x00d;'
+                },
+                2: {
+                    name: 'Task Migrated',
+                    html: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+                    char: '&#x105;'
+                },
+                3: {
+                    name: 'Task Scheduled',
+                    html: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    char: '&#x104;'
+                },
+                4: {
+                    name: 'Event',
+                    html: '<i class="fa fa-circle-o" aria-hidden="true"></i>',
+                    char: '&#x10c;'
+                },
+                5: {
+                    name: 'Note',
+                    html: '<i class="fa fa-minus" aria-hidden="true"></i>',
+                    char: '"&#x068;'
+                }
+            },
             todoSetType: function todoSetType(todoID, typeID) {
                 this.items[todoID].type = typeID;
             },
@@ -12210,13 +12225,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
 
                 this.items.push({
-                    id: newItemID,
                     type: newItemType
                 });
 
+                console.log(index); // debug
+
                 this.gotoTodoItem(newItemID);
             },
-            deleteTodoItem: function deleteTodoItem(todoID) {},
+            deleteTodoItem: function deleteTodoItem(todoID) {
+                delete this.data[todoID];
+            },
             // todo: add the ability to drag the order of the items around
             gotoTodoItem: function gotoTodoItem(todoID) {
                 // Moves cursor to text box for item ID specified
@@ -31981,8 +31999,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_c('i', {
-      staticClass: "fa"
-    }, [_vm._v("-")]), _vm._v("Note")])])])])]), _vm._v(" "), _c('div', {
+      staticClass: "fa fa-minus",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    }), _vm._v("Note")])])])])]), _vm._v(" "), _c('div', {
       staticClass: "list-text-container"
     }, [_c('input', {
       directives: [{
@@ -32009,8 +32030,28 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })]), _vm._v(" "), _c('div', {
       staticClass: "list-btn-container"
+    }, [_c('div', {
+      staticClass: "dropdown"
     }, [_c('button', {
-      staticClass: "btn btn-default btn-lg btn-delete",
+      staticClass: "btn btn-default btn-lg dropdown-toggle btn-item-menu",
+      attrs: {
+        "type": "button",
+        "id": 'item-' + item.id + '-type',
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "true"
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-ellipsis-v",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })]), _vm._v(" "), _c('ul', {
+      staticClass: "dropdown-menu"
+    }, [_c('li', [_c('a', {
+      attrs: {
+        "href": "#"
+      },
       on: {
         "click": function($event) {
           _vm.deleteTodoItem(item.id)
@@ -32021,7 +32062,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "aria-hidden": "true"
       }
-    })])])])
+    }), _vm._v(" Delete")])])])])])])
   }), _vm._v(" "), _c('li', {
     staticClass: "todo-list-item"
   }, [_c('div', {

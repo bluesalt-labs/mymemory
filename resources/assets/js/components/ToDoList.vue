@@ -16,7 +16,7 @@
                         <li><a href="#" @click="todoSetType(item.id, 2)"><i class="fa fa-angle-right" aria-hidden="true"></i>Task Migrated</a></li>
                         <li><a href="#" @click="todoSetType(item.id, 3)"><i class="fa fa-angle-left" aria-hidden="true"></i>Task Scheduled</a></li>
                         <li><a href="#" @click="todoSetType(item.id, 4)"><i class="fa fa-circle-o" aria-hidden="true"></i>Event</a></li>
-                        <li><a href="#" @click="todoSetType(item.id, 5)"><i class="fa">-</i>Note</a></li>
+                        <li><a href="#" @click="todoSetType(item.id, 5)"><i class="fa fa-minus" aria-hidden="true"></i>Note</a></li>
                     </ul>
                 </div>
             </div>
@@ -28,7 +28,18 @@
 
             <div class="list-btn-container">
                 <!-- todo: for the delete function, add an archive or something? so there's an undo/ctrl+z option? -->
-                <button class="btn btn-default btn-lg btn-delete" @click="deleteTodoItem(item.id)"><i class="fa fa-minus-square-o" aria-hidden="true"></i></button>
+                <div class="dropdown">
+                    <button class="btn btn-default btn-lg dropdown-toggle btn-item-menu"
+                            type="button" v-bind:id="'item-' + item.id + '-type'"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="true">
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" @click="deleteTodoItem(item.id)"><i class="fa fa-minus-square-o" aria-hidden="true"></i> Delete</a></li>
+                    </ul>
+                </div>
             </div>
 
         </li>
@@ -41,6 +52,7 @@
 </template>
 
 <script type="text/babel">
+    // refer to this to figure out a better way to get this done: <https://vuejs.org/v2/guide/list.html> -->
     export default {
         mounted() {
             console.log('Component mounted.');
@@ -50,57 +62,50 @@
                 defaults: {
                     type: 0
                 },
-                items: [
-                    {
-                        id: 0,
+                items: {
+                    0: {
                         type: 1,
                         title: 'item1',
                         description: 'item 1 is an item'
                     },
-                    {
-                        id: 1,
+                    1: {
                         type: 2,
                         title: 'item2',
                         description: 'item 2 is an item'
-                    },
-                ],
-                todoListTypes: [
-                    {
-                        id: 0,
+                    }
+                },
+                todoListTypes: {
+                    0: {
                         name: 'Task',
                         html: '<i class="fa fa-circle" aria-hidden="true"></i>',
                         char: '&#x111;'
                     },
-                    {
-                        id: 1,
+                    1: {
                         name: 'Task Complete',
                         html: '<i class="fa fa-times" aria-hidden="true"></i>',
                         char: '&#x00d;'
                     },
-                    {
-                        id: 2,
+                    2: {
                         name: 'Task Migrated',
                         html: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
                         char: '&#x105;'
                     },
-                    {
-                        id: 3,
+                    3: {
                         name: 'Task Scheduled',
                         html: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
                         char: '&#x104;'
                     },
-                    {
-                        id: 4,
+                    4: {
                         name: 'Event',
                         html: '<i class="fa fa-circle-o" aria-hidden="true"></i>',
                         char: '&#x10c;'
                     },
-                    {
-                        id: 5,
+                    5: {
                         name: 'Note',
-                        html: '-'
+                        html: '<i class="fa fa-minus" aria-hidden="true"></i>',
+                        char: '"&#x068;'
                     },
-                ],
+                },
                 todoSetType: function(todoID, typeID) {
                     this.items[todoID].type = typeID;
                 },
@@ -129,14 +134,15 @@
                     }
 
                     this.items.push({
-                        id: newItemID,
                         type: newItemType
                     });
+
+                    console.log(index); // debug
 
                     this.gotoTodoItem(newItemID);
                 },
                 deleteTodoItem: function(todoID) {
-
+                    delete this.data[todoID];
                 },
                 // todo: add the ability to drag the order of the items around
                 gotoTodoItem: function(todoID) {
@@ -159,6 +165,4 @@
             };
         }
     }
-
-
 </script>

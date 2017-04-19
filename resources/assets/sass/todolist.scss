@@ -24,7 +24,7 @@ ul#todo-list {
 
 .todo-list-item .dropdown,
 .todo-list-item input[type='text'],
-.todo-list-item .btn-delete { display: block; }
+.todo-list-item .btn-item-menu { display: block; }
 
 .todo-list-item button {
   width: 36px;
@@ -71,11 +71,11 @@ ul#todo-list {
   border-bottom: 1px solid $input-border;
 }
 
-.todo-list-item .btn-delete { visibility: hidden; }
+.todo-list-item .btn-item-menu { visibility: hidden; }
 
-.todo-list-item:hover .btn-delete,
-.todo-list-item:focus .btn-delete,
-.todo-list-item:active .btn-delete { visibility: visible; }
+.todo-list-item:hover .btn-item-menu,
+.todo-list-item:focus .btn-item-menu,
+.todo-list-item:active .btn-item-menu { visibility: visible; }
 
 
 .todo-list-item select:hover,
