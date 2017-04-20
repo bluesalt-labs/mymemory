@@ -13,9 +13,9 @@ ul#todo-list {
 
 .todo-list-item > .list-btn-container,
 .todo-list-item > .list-text-container {
-  margin: 0;
+  margin: 0 0 auto 0;
   padding: 0;
-  height: $list-item-height;
+  min-height: $list-item-height;
   display: inline-block;
 }
 
@@ -23,7 +23,7 @@ ul#todo-list {
 .todo-list-item > .list-text-container { width: 100%; }
 
 .todo-list-item .dropdown,
-.todo-list-item input[type='text'],
+.todo-list-item textarea,
 .todo-list-item .btn-item-menu { display: block; }
 
 .todo-list-item button {
@@ -55,19 +55,21 @@ ul#todo-list {
   margin: 0 auto;
 }
 
-.todo-list-item input[type='text'] {
+.todo-list-item textarea {
   border: none;
   outline: none;
   border-bottom: 1px solid transparent;
   /*border-left: 1px solid $input-border;*/
   width: 100%;
-  padding: 2px 5px;
-  height: $list-item-height;
+  padding: 10px 5px 2px 5px;
+  height: 46px;
+  resize: none;
+  overflow: hidden;
 }
 
-.todo-list-item:hover input[type='text'],
-.todo-list-item:focus input[type='text'],
-.todo-list-item:active input[type='text'] {
+.todo-list-item:hover textarea,
+.todo-list-item:focus textarea,
+.todo-list-item:active textarea {
   border-bottom: 1px solid $input-border;
 }
 

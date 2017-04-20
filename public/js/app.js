@@ -12146,118 +12146,136 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // refer to this to figure out a better way to get this done: <https://vuejs.org/v2/guide/list.html> -->
 /* harmony default export */ __webpack_exports__["default"] = {
     mounted: function mounted() {
-        console.log('Component mounted.');
+        console.log('TodoList Component mounted.'); // debug
     },
     data: function data() {
         return {
             defaults: {
                 type: 0
             },
-            items: {
-                0: {
-                    type: 1,
-                    title: 'item1',
-                    description: 'item 1 is an item'
-                },
-                1: {
-                    type: 2,
-                    title: 'item2',
-                    description: 'item 2 is an item'
-                }
-            },
-            todoListTypes: {
-                0: {
-                    name: 'Task',
-                    html: '<i class="fa fa-circle" aria-hidden="true"></i>',
-                    char: '&#x111;'
-                },
-                1: {
-                    name: 'Task Complete',
-                    html: '<i class="fa fa-times" aria-hidden="true"></i>',
-                    char: '&#x00d;'
-                },
-                2: {
-                    name: 'Task Migrated',
-                    html: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
-                    char: '&#x105;'
-                },
-                3: {
-                    name: 'Task Scheduled',
-                    html: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-                    char: '&#x104;'
-                },
-                4: {
-                    name: 'Event',
-                    html: '<i class="fa fa-circle-o" aria-hidden="true"></i>',
-                    char: '&#x10c;'
-                },
-                5: {
-                    name: 'Note',
-                    html: '<i class="fa fa-minus" aria-hidden="true"></i>',
-                    char: '"&#x068;'
-                }
-            },
-            todoSetType: function todoSetType(todoID, typeID) {
-                this.items[todoID].type = typeID;
-            },
-            addTodoItem: function addTodoItem(afterTodoID) {
-                var newItemID;
+            items: [{
+                id: 4857583,
+                type: 1,
+                title: 'item1',
+                description: 'item 1 is an item'
+            }, {
+                id: 4857372,
+                type: 2,
+                title: 'item2',
+                description: 'item 2 is an item'
+            }],
+            todoListTypes: [{
+                name: 'Task',
+                html: '<i class="fa fa-circle" aria-hidden="true"></i>',
+                char: '&#x111;'
+            }, {
+                name: 'Task Complete',
+                html: '<i class="fa fa-times" aria-hidden="true"></i>',
+                char: '&#x00d;'
+            }, {
+                name: 'Task Migrated',
+                html: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+                char: '&#x105;'
+            }, {
+                name: 'Task Scheduled',
+                html: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                char: '&#x104;'
+            }, {
+                name: 'Event',
+                html: '<i class="fa fa-circle-o" aria-hidden="true"></i>',
+                char: '&#x10c;'
+            }, {
+                name: 'Note',
+                html: '<i class="fa fa-minus" aria-hidden="true"></i>',
+                char: '"&#x068;'
+            }]
+        };
+    },
 
-                if (afterTodoID >= 0) {
+    methods: {
+        todoSetType: function todoSetType(todoID, typeID) {
+            this.items[todoID].type = typeID;
+        },
+        onTodoTitleChange: function onTodoTitleChange() {
+            event.srcElement.style.height = event.srcElement.scrollHeight + "px";
+        },
+        addTodoItem: function addTodoItem(todoID) {
+            var newTodoID;
+
+            if (event.keyCode === 13 && !event.shiftKey) {
+                event.preventDefault();
+                if (todoID >= 0) {
                     // If to do item id is specified, add new item after it
                     // and shift others after it down
-                    newItemID = afterTodoID + 1;
+                    newTodoID = todoID + 1;
                 } else {
                     // otherwise, add to the end of the list
-                    newItemID = this.items.length;
+                    newTodoID = this.items.length;
                 }
-
-                // for now, only allow adding to the end of the list
-                // todo: fix this!
-                newItemID = this.items.length; // debug
-                console.log("new item ID is ID # " + newItemID + '.'); // debug
 
                 var newItemType = this.defaults.type;
 
                 // If there is a previous item and it has a type, use that type for the new item.
-                if (this.getPreviousTodoItem(newItemID) > 0) {
-                    newItemType = this.items[this.getPreviousTodoItem(newItemID)].type;
+                if (this.getPreviousTodoItem(newTodoID) > 0) {
+                    newItemType = this.items[this.getPreviousTodoItem(newTodoID)].type;
                 }
 
                 this.items.push({
                     type: newItemType
                 });
 
-                console.log(index); // debug
+                /*
+                var object = this.items[newTodoID]; // debug
+                Vue.nextTick(() => {
+                    object.focus();
+                });
+                */
 
-                this.gotoTodoItem(newItemID);
-            },
-            deleteTodoItem: function deleteTodoItem(todoID) {
-                delete this.data[todoID];
-            },
-            // todo: add the ability to drag the order of the items around
-            gotoTodoItem: function gotoTodoItem(todoID) {
-                // Moves cursor to text box for item ID specified
-                // todo: add @keyup.tab="gotoTodoItem(item.id + 1)" to todo items
-                // todo: add @keyup.shift.tab="gotoTodoItem(item.id - 1)" to todo items
-            },
-            getPreviousTodoItem: function getPreviousTodoItem(todoID) {
-                var prevID = todoID - 1;
-                if (!(prevID in this.items)) {
-                    prevID = -1;
-                }
+                /* <using something like this? I don't know what's going on...
+                Vue.directive('focus', {
+                    bind: function() {
+                        var object = event.
+                    }
+                });
+                this.gotoTodoItem(newTodoID);
+                */
+            } else {
+                this.onTodoTitleChange(event);
+            } // you would think this wouldn't be needed, but whatever
+        },
+        deleteTodoItem: function deleteTodoItem(todoID) {
+            //delete this.data[todoID];
+            this.data.splice(todoID, 1); // use this instead?
+        },
+        // todo: add the ability to drag the order of the items around
+        gotoTodoItem: function gotoTodoItem(todoID) {
+            // Moves cursor to text box for item ID specified
+            // todo: add @keyup.tab="gotoTodoItem(index + 1)" to todo items
+            // todo: add @keyup.shift.tab="gotoTodoItem(index - 1)" to todo items
 
-                return prevID;
-            },
-            getNextTodoItem: function getNextTodoItem(todoID) {
-                var nextID = todoID + 1;
-                if (!(nextID in this.items)) {
-                    nextID = -1;
-                }
-
-                return nextID;
+            /* debug */
+            Vue.nextTick(function () {
+                //console.log(this.$refs); // debug
+                //this.$refs[todoID].focus();
+            });
+            /* end debug */
+        },
+        getPreviousTodoItem: function getPreviousTodoItem(todoID) {
+            var prevID = todoID - 1;
+            if (!(prevID in this.items)) {
+                prevID = -1;
             }
-        };
+
+            return prevID;
+        },
+        getNextTodoItem: function getNextTodoItem(todoID) {
+            var nextID = todoID + 1;
+            if (!(nextID in this.items)) {
+                nextID = -1;
+            }
+
+            return nextID;
+        }
     }
 };
 
@@ -31890,11 +31908,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "todo-list"
     }
-  }, [_vm._l((_vm.items), function(item) {
+  }, [_vm._l((_vm.items), function(item, index) {
     return _c('li', {
+      key: item.id,
       staticClass: "todo-list-item",
       attrs: {
-        "id": 'todo-list-item-' + item.id
+        "id": 'todo-list-item-' + index
       }
     }, [_c('div', {
       staticClass: "list-btn-container"
@@ -31904,7 +31923,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "btn btn-default btn-lg dropdown-toggle",
       attrs: {
         "type": "button",
-        "id": 'item-' + item.id + '-type',
+        "id": 'item-' + index + '-type',
         "data-toggle": "dropdown",
         "aria-haspopup": "true",
         "aria-expanded": "true"
@@ -31917,7 +31936,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })]), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu",
       attrs: {
-        "aria-labelledby": 'item-' + item.id + '-type'
+        "aria-labelledby": 'item-' + index + '-type'
       }
     }, [_c('li', [_c('a', {
       attrs: {
@@ -31925,7 +31944,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.todoSetType(item.id, 0)
+          _vm.todoSetType(index, 0)
         }
       }
     }, [_c('i', {
@@ -31939,7 +31958,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.todoSetType(item.id, 1)
+          _vm.todoSetType(index, 1)
         }
       }
     }, [_c('i', {
@@ -31953,7 +31972,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.todoSetType(item.id, 2)
+          _vm.todoSetType(index, 2)
         }
       }
     }, [_c('i', {
@@ -31967,7 +31986,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.todoSetType(item.id, 3)
+          _vm.todoSetType(index, 3)
         }
       }
     }, [_c('i', {
@@ -31981,7 +32000,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.todoSetType(item.id, 4)
+          _vm.todoSetType(index, 4)
         }
       }
     }, [_c('i', {
@@ -31995,7 +32014,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.todoSetType(item.id, 5)
+          _vm.todoSetType(index, 5)
         }
       }
     }, [_c('i', {
@@ -32005,24 +32024,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _vm._v("Note")])])])])]), _vm._v(" "), _c('div', {
       staticClass: "list-text-container"
-    }, [_c('input', {
+    }, [_c('textarea', {
       directives: [{
         name: "model",
         rawName: "v-model",
         value: (item.title),
         expression: "item.title"
       }],
-      attrs: {
-        "type": "text"
-      },
       domProps: {
         "value": (item.title)
       },
       on: {
-        "keyup": function($event) {
+        "keydown": function($event) {
           if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-          _vm.addTodoItem(item.id)
+          _vm.addTodoItem($event)
         },
+        "keyup": _vm.onTodoTitleChange,
         "input": function($event) {
           if ($event.target.composing) { return; }
           item.title = $event.target.value
@@ -32032,21 +32049,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "list-btn-container"
     }, [_c('div', {
       staticClass: "dropdown"
-    }, [_c('button', {
-      staticClass: "btn btn-default btn-lg dropdown-toggle btn-item-menu",
-      attrs: {
-        "type": "button",
-        "id": 'item-' + item.id + '-type',
-        "data-toggle": "dropdown",
-        "aria-haspopup": "true",
-        "aria-expanded": "true"
-      }
-    }, [_c('i', {
-      staticClass: "fa fa-ellipsis-v",
-      attrs: {
-        "aria-hidden": "true"
-      }
-    })]), _vm._v(" "), _c('ul', {
+    }, [_vm._m(0, true), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu"
     }, [_c('li', [_c('a', {
       attrs: {
@@ -32054,7 +32057,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       on: {
         "click": function($event) {
-          _vm.deleteTodoItem(item.id)
+          _vm.deleteTodoItem(index)
         }
       }
     }, [_c('i', {
@@ -32070,9 +32073,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn btn-default btn-lg",
     on: {
-      "click": function($event) {
-        _vm.addTodoItem()
-      }
+      "click": _vm.addTodoItem
     }
   }, [_c('i', {
     staticClass: "fa fa-plus-square-o",
@@ -32080,7 +32081,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-hidden": "true"
     }
   })])])])], 2)
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('button', {
+    staticClass: "btn btn-default btn-lg dropdown-toggle btn-item-menu",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown",
+      "aria-haspopup": "true",
+      "aria-expanded": "true"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-ellipsis-v",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
