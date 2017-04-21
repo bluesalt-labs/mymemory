@@ -13,7 +13,7 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('todolist', require('./components/ToDoList.vue'));
+Vue.component('todo-list', require('./components/TodoList.vue'));
 
 const app = new Vue({
     el: '#app'

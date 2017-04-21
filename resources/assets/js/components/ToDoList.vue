@@ -1,16 +1,16 @@
 <template>
-    <ul id="todo-list">
-        <li class="todo-list-item" v-for="(item, index) in items" :key="item.id" v-bind:id="'todo-list-item-' + index">
+    <ul class="todo-list">
+        <li class="todo-list-item" v-for="(item, index) in items" :key="item.id" :id="'todo-list-item-' + index">
             <div class="list-btn-container">
                 <div class="dropdown">
                     <button class="btn btn-default btn-lg dropdown-toggle"
-                            type="button" v-bind:id="'item-' + index + '-type'"
+                            type="button" :id="'item-' + index + '-type'"
                             data-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="true">
                         <span class="fa" v-html="todoListTypes[item.type].html"></span>
                     </button>
-                    <ul class="dropdown-menu" v-bind:aria-labelledby="'item-' + index + '-type'">
+                    <ul class="dropdown-menu" :aria-labelledby="'item-' + index + '-type'">
                         <li><a href="#" @click="todoSetType(index, 0)"><i class="fa fa-circle" aria-hidden="true"></i>Task</a></li>
                         <li><a href="#" @click="todoSetType(index, 1)"><i class="fa fa-times" aria-hidden="true"></i>Task Complete</a></li>
                         <li><a href="#" @click="todoSetType(index, 2)"><i class="fa fa-angle-right" aria-hidden="true"></i>Task Migrated</a></li>
@@ -53,6 +53,7 @@
 
 <script type="text/babel">
     // refer to this to figure out a better way to get this done: <https://vuejs.org/v2/guide/list.html> -->
+    // This might help me figure out child template stuff?: <https://css-tricks.com/intro-to-vue-2-components-props-slots/>
     export default {
         mounted() {
             console.log('TodoList Component mounted.'); // debug

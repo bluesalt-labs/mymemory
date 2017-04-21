@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <!--<div class="panel-heading">Example Component</div>-->
                 <div class="panel-body">
-                    <todolist></todolist>
+                    <todo-list></todo-list>
                 </div>
             </div>
         </div>
