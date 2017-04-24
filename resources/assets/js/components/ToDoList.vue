@@ -1,48 +1,49 @@
 <template>
     <ul class="todo-list">
-        <li class="todo-list-item" v-for="(item, index) in items" :key="item.id" :id="'todo-list-item-' + index">
-            <div class="list-btn-container">
-                <div class="dropdown">
-                    <button class="btn btn-default btn-lg dropdown-toggle"
-                            type="button" :id="'item-' + index + '-type'"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="true">
-                        <span class="fa" v-html="todoListTypes[item.type].html"></span>
-                    </button>
-                    <ul class="dropdown-menu" :aria-labelledby="'item-' + index + '-type'">
-                        <li><a href="#" @click="todoSetType(index, 0)"><i class="fa fa-circle" aria-hidden="true"></i>Task</a></li>
-                        <li><a href="#" @click="todoSetType(index, 1)"><i class="fa fa-times" aria-hidden="true"></i>Task Complete</a></li>
-                        <li><a href="#" @click="todoSetType(index, 2)"><i class="fa fa-angle-right" aria-hidden="true"></i>Task Migrated</a></li>
-                        <li><a href="#" @click="todoSetType(index, 3)"><i class="fa fa-angle-left" aria-hidden="true"></i>Task Scheduled</a></li>
-                        <li><a href="#" @click="todoSetType(index, 4)"><i class="fa fa-circle-o" aria-hidden="true"></i>Event</a></li>
-                        <li><a href="#" @click="todoSetType(index, 5)"><i class="fa fa-minus" aria-hidden="true"></i>Note</a></li>
-                    </ul>
+        <draggable v-model="items" :options="{group:'todos'}" @start="drag=true" @end="drag=false">
+            <li class="todo-list-item" v-for="(item, index) in items" :key="item.id" ref="'todo-list-item-' + index">
+                <div class="list-btn-container">
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-lg dropdown-toggle"
+                                type="button" :id="'item-' + index + '-type'"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="true">
+                            <span class="fa" v-html="todoListTypes[item.type].html"></span>
+                        </button>
+                        <ul class="dropdown-menu" :aria-labelledby="'item-' + index + '-type'">
+                            <li><a href="#" @click="todoSetType(index, 0)"><i class="fa fa-circle" aria-hidden="true"></i>Task</a></li>
+                            <li><a href="#" @click="todoSetType(index, 1)"><i class="fa fa-times" aria-hidden="true"></i>Task Complete</a></li>
+                            <li><a href="#" @click="todoSetType(index, 2)"><i class="fa fa-angle-right" aria-hidden="true"></i>Task Migrated</a></li>
+                            <li><a href="#" @click="todoSetType(index, 3)"><i class="fa fa-angle-left" aria-hidden="true"></i>Task Scheduled</a></li>
+                            <li><a href="#" @click="todoSetType(index, 4)"><i class="fa fa-circle-o" aria-hidden="true"></i>Event</a></li>
+                            <li><a href="#" @click="todoSetType(index, 5)"><i class="fa fa-minus" aria-hidden="true"></i>Note</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="list-text-container">
-                <!-- todo: when using backspace in this text box, if there is no text, delete it -->
-                <textarea  v-model="item.title" @keydown.enter="addTodoItem" @keyup="onTodoTitleChange"></textarea>
-            </div>
-
-            <div class="list-btn-container">
-                <!-- todo: for the delete function, add an archive or something? so there's an undo/ctrl+z option? -->
-                <div class="dropdown">
-                    <button class="btn btn-default btn-lg dropdown-toggle btn-item-menu"
-                            type="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="true">
-                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" @click="deleteTodoItem(index)"><i class="fa fa-minus-square-o" aria-hidden="true"></i> Delete</a></li>
-                    </ul>
+                <div class="list-text-container">
+                    <!-- todo: when using backspace in this text box, if there is no text, delete it -->
+                    <textarea  v-model="item.title" @keydown.enter="addTodoItem" @keyup="onTodoTitleChange"></textarea>
                 </div>
-            </div>
 
-        </li>
+                <div class="list-btn-container">
+                    <!-- todo: for the delete function, add an archive or something? so there's an undo/ctrl+z option? -->
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-lg dropdown-toggle btn-item-menu"
+                                type="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="true">
+                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" @click="deleteTodoItem(index)"><i class="fa fa-minus-square-o" aria-hidden="true"></i> Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </draggable>
         <li class="todo-list-item">
             <div class="list-btn-container">
                 <button class="btn btn-default btn-lg" @click="addTodoItem"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
@@ -52,9 +53,13 @@
 </template>
 
 <script type="text/babel">
+    import draggable from 'vuedraggable';
     // refer to this to figure out a better way to get this done: <https://vuejs.org/v2/guide/list.html> -->
     // This might help me figure out child template stuff?: <https://css-tricks.com/intro-to-vue-2-components-props-slots/>
     export default {
+        components: {
+            draggable
+        },
         mounted() {
             console.log('TodoList Component mounted.'); // debug
         },
