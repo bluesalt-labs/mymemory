@@ -6,10 +6,10 @@
 @import "variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap/dist/css/bootstrap";
 
 // Font Awesome
-@import "node_modules/font-awesome/scss/font-awesome";
+@import "node_modules/font-awesome/css/font-awesome";
 
 // Other stylesheets
 @import "todolist";
