@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class UserAppController extends Controller
 {
+    protected $user;
+
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -17,12 +17,14 @@ class HomeController extends Controller
     }
 
     /**
+     *
      * Show the application dashboard.
      *
+     * @param $username
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('home');
+        return view('user-app', ['user' => $this->user]);
     }
 }

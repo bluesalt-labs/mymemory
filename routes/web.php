@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// User App uses Vue-Router.
+Route::get('/app/{route?}', 'UserAppController@index')->where('route', '(.*)');
+
