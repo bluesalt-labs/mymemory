@@ -1,8 +1,8 @@
 <template>
     <draggable v-model="notes" @start="drag=true" @end="drag=false">
         <div class="note-item" v-for="(note, index) in notes" :id="'note-item-' + index">
-            <input class="note-item-title" type="text" v-model="note.title" />
-            <textarea :id="'note-content-' + index" v-model="note.content"></textarea>
+            <textarea class="note-item-title" :id="'note-title-' + index" v-model="note.title"></textarea>
+            <textarea class="note-item-content" :id="'note-content-' + index" v-model="note.content"></textarea>
         </div>
     </draggable>
 </template>
@@ -34,3 +34,7 @@
         }
     };
 </script>
+
+<style type="text/css">
+    .note-item { float: left; }
+</style>

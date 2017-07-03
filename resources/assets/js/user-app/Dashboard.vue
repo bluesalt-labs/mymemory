@@ -12,7 +12,7 @@
         <hr />
         <div class="section">
             <h1>Notes</h1>
-            <Note></Note>
+            <NoteItem></NoteItem>
         </div>
     </div>
 </template>
@@ -20,10 +20,10 @@
 <script type="text/javascript">
     import ToDoList from '../components/ToDoList'
     import Calendar from '../components/Calendar'
-    import Note from '../components/Note'
+    import NoteItem from '../components/NoteItem'
 
     export default {
         name: 'dashboard',
-        components: { ToDoList, Calendar, Note }
+        components: { ToDoList, Calendar, NoteItem }
     }
 </script>
