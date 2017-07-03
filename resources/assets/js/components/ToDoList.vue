@@ -207,7 +207,7 @@
                 var newIndex = 0;
 
                 // If no index specified, add to the end of the list
-                if( (!beforeIndex && !afterIndex) || ) {
+                if( (!beforeIndex && !afterIndex) ) {
                     afterIndex = (this.items.length > 0 ? this.items.length - 1 : 0);
                 }
 

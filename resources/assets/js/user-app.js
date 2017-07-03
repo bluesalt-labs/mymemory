@@ -5,9 +5,9 @@ import UserApp from './user-app/App'
 
 // Views
 import Dashboard from './user-app/Dashboard'
-
-// Components
-//Vue.component('foo', require('./foo.vue'));
+import ToDoList from './user-app/ToDoList'
+import Notes from './user-app/Notes'
+import Calendar from './user-app/Calendar'
 
 Vue.use(VueRouter);
 
@@ -20,6 +20,21 @@ const routes = [
         path: '/dashboard',
         name: 'Dashboard',
         component: Dashboard
+    },
+    {
+        path: '/calendar',
+        name: 'Calendar',
+        component: Calendar
+    },
+    {
+        path: '/todo-list',
+        name: 'ToDoList',
+        component: ToDoList
+    },
+    {
+        path: '/notes',
+        name: 'Notes',
+        component: Notes
     }
 ];
 
