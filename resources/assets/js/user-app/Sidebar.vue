@@ -5,7 +5,6 @@
             <li><a href="/app/#/calendar">Calendar</a></li>
             <li><a href="/app/#/todo-list">To Do List</a></li>
             <li><a href="/app/#/notes">Notes</a></li>
-
         </ul>
     </nav>
 </template>
@@ -16,18 +15,22 @@
     }
 </script>
 
-<style type="text/css">
+<style lang="scss" type="text/scss">
+    @import '../../sass/_variables.scss';
     #user-sidebar {
-        left: 0;
+        left: -$sidebar-width;
         z-index: 9999;
         position: fixed;
-        top: 50px;
-        width: 250px;
+        top: $navbar-height;
+        width: $sidebar-width;
         height: 100%;
         padding: 0;
         margin: 0;
         background: #f8f8f8;
         border-top: 1px solid #e7e7e7;
+
+        -webkit-transition: left $sidebar-trans-time;
+        transition: left $sidebar-trans-time;
     }
 
     #user-app-container #sidebar-links {
@@ -53,6 +56,9 @@
         background: #cecece;
         text-decoration: none;
         cursor: pointer;
+    }
+    @media(min-width: 768px) {
+        #user-sidebar { left: 0; }
     }
 
 

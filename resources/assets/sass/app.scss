@@ -12,17 +12,15 @@
 @import "node_modules/font-awesome/css/font-awesome";
 
 // Other stylesheets
-@import "todolist";
+@import "calendar";
+@import "journal";
 @import "note";
+@import "todolist";
 
-#app {
-  margin-top: 50px;
-}
+#app { margin-top: $navbar-height; }
 
 input[type="text"], input[type="number"], textarea {
   font-family: $font-input;
 }
 
-pre, code {
-  font-family: $font-mono;
-}
+pre, code { font-family: $font-mono; }
