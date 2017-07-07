@@ -1,13 +1,11 @@
 <template>
     <div class="section">
-        <Notes></Notes>
+        500 Error!
     </div>
 </template>
 
 <script type="text/javascript">
-    import Notes from '../components/Notes'
     export default {
-        name: 'notes',
-        components: { Notes }
+        name: '500'
     }
 </script>

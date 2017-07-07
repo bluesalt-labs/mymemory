@@ -18,5 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // User App uses Vue-Router.
-Route::get('/app/{route?}', 'UserAppController@index')->where('route', '(.*)');
+Route::middleware('auth')->group(function() {
+    Route::get('/app/{route?}', 'UserAppController@index')->where('route', '(.*)');
+});
 

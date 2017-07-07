@@ -1,13 +1,11 @@
 <template>
     <div class="section">
-        <Notes></Notes>
+        Not Found :(
     </div>
 </template>
 
 <script type="text/javascript">
-    import Notes from '../components/Notes'
     export default {
-        name: 'notes',
-        components: { Notes }
+        name: '404'
     }
 </script>

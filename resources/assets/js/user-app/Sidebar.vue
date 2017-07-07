@@ -1,10 +1,10 @@
 <template>
     <nav id="user-sidebar">
         <ul id="sidebar-links">
-            <li><a href="/app/#/dashboard">Dashboard</a></li>
-            <li><a href="/app/#/calendar">Calendar</a></li>
-            <li><a href="/app/#/todo-list">To Do List</a></li>
-            <li><a href="/app/#/notes">Notes</a></li>
+            <li><a href="/app#/dashboard">Dashboard</a></li>
+            <li><a href="/app#/calendar">Calendar</a></li>
+            <li><a href="/app#/todo-list">To Do List</a></li>
+            <li><a href="/app#/notes">Notes</a></li>
         </ul>
     </nav>
 </template>

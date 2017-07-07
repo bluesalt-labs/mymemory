@@ -14,9 +14,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::get('/user', function (Request $request) {
+        return Auth::user();
+    });
+});
+
     //return json_encode('{{ "Hello": "World" }}');
     //Route::resource('post', 'APIController');
     //return Auth::guard('api')->user();
+    //return $request->user();
+
+/*
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+*/

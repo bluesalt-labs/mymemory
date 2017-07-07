@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
-use Illuminate\Http\Request;
+use App\User;
+
 
 class UserAppController extends Controller
 {
@@ -11,20 +13,32 @@ class UserAppController extends Controller
     /**
      * Create a new controller instance.
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
+        /*
+        var_dump(Auth::user());
+        echo "<hr />";
+        if (Auth::check()) {
+            var_dump(Auth::user());
+            die;
+        } else {
+            var_dump(array(
+                'id' => null
+            ));
+        }
+        */
+
     }
 
     /**
      *
      * Show the application dashboard.
      *
-     * @param $username
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+
         return view('user-app', ['user' => $this->user]);
     }
 }

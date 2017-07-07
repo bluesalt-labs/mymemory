@@ -1,40 +1,82 @@
 <template>
-    <draggable v-model="notes" @start="drag=true" @end="drag=false">
-        <div class="note-item" v-for="(note, index) in notes" :id="'note-item-' + index">
-            <textarea class="note-item-title" :id="'note-title-' + index" v-model="note.title"></textarea>
-            <textarea class="note-item-content" :id="'note-content-' + index" v-model="note.content"></textarea>
-        </div>
-    </draggable>
+    <div class="note-item" :id="'note-item-' + note.id">
+        <editable class="note-item-title" :id="'note-title-' + note.id" :content="note.title" @update="text = $event"></editable>
+        <editable class="note-item-content" :id="'note-content-' + note.id" :content="note.content" @update="text = $event"></editable>
+    </div>
 </template>
 
 <script type="text/babel">
-    import draggable from 'vuedraggable';
 
     export default {
         components: {
-            draggable
-        },
-        data() {
-            return {
-                notes: [
-                    {
-                        id: 22345,
-                        type: 0,
-                        title: 'note1',
-                        content: 'The contents of note1'
+            editable: {
+                template: '<div contenteditable="true" aria-multiline="true" role="textbox" spellcheck="true" @input="update" @click="onEditableClick"></div>',
+                props: ['value'],
+                mounted: function() {
+                    this.$el.innerText = this.value;
+                },
+                methods: {
+                    update: function(event) {
+                        this.$emit('update', event.target.innerText);
                     },
-                    {
-                        id: 22346,
-                        type: 0,
-                        title: 'note2',
-                        content: 'The contents of note2'
+                    onEditableClick: function(e) {
+                        e.target.focus();
+                        console.log('focusing on #' + e.target.id); // debug
                     }
-                ]
-            };
-        }
+                }
+            }
+        },
+        props: ['note'],
+        methods: {}
     };
 </script>
 
-<style type="text/css">
-    .note-item { float: left; }
+<style lang="scss" type="text/scss">
+    @import '../../sass/_variables.scss';
+    .note-item {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid $panel-default-border;
+        background: rgba($panel-default-border, 0.25);
+        min-width: 250px;
+        min-height: 250px;
+        width: auto;
+        height: auto;
+        margin: 5px;
+        padding: 5px 10px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    .note-item .note-item-title,
+    .note-item .note-item-content {
+        background: transparent;
+        display: block;
+        border: none;
+        outline: none;
+        width: 100%;
+        cursor: text;
+        overflow: hidden;
+        resize: none;
+        padding: 5px;
+    }
+    .note-item .note-item-title {
+        font-weight: bold;
+        font-size: 1.5em;
+        padding-bottom: 7px;
+        border-bottom: 1px solid transparent;
+    }
+    .note-item .note-item-content {
+        flex: 1;
+        height: 100%;
+        font-size: 1.2em;
+    }
+
+    .note-item .note-item-title:hover,
+    .note-item .note-item-title:focus,
+    .note-item .note-item-title:active{
+        border-color: $input-border;
+    }
 </style>

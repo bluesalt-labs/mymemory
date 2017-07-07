@@ -9,6 +9,8 @@ import Calendar from './user-app/Calendar'
 import ToDoList from './user-app/ToDoList'
 import Journal from './user-app/Journal'
 import Notes from './user-app/Notes'
+import _500 from './user-app/_500'
+import _404 from './user-app/_404'
 
 Vue.use(VueRouter);
 
@@ -41,6 +43,16 @@ const routes = [
         path: '/notes',
         name: 'Notes',
         component: Notes
+    },
+    {
+        path: '/error',
+        name: '500',
+        component: _500
+    },
+    {
+        path: '*',
+        name: '404',
+        component: _404
     }
 ];
 

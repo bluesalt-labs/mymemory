@@ -11554,7 +11554,7 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(88)
+__webpack_require__(107)
 
 var Component = __webpack_require__(2)(
   /* script */
@@ -12913,8 +12913,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuedraggable__);
 //
 //
 //
@@ -12922,30 +12920,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
     components: {
-        draggable: __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default.a
+        editable: {
+            template: '<div contenteditable="true" aria-multiline="true" role="textbox" spellcheck="true" @input="update" @click="onEditableClick"></div>',
+            props: ['value'],
+            mounted: function mounted() {
+                this.$el.innerText = this.value;
+            },
+            methods: {
+                update: function update(event) {
+                    this.$emit('update', event.target.innerText);
+                },
+                onEditableClick: function onEditableClick(e) {
+                    e.target.focus();
+                    console.log('focusing on #' + e.target.id); // debug
+                }
+            }
+        }
     },
-    data: function data() {
-        return {
-            notes: [{
-                id: 22345,
-                type: 0,
-                title: 'note1',
-                content: 'The contents of note1'
-            }, {
-                id: 22346,
-                type: 0,
-                title: 'note2',
-                content: 'The contents of note2'
-            }]
-        };
-    }
+    props: ['note'],
+    methods: {}
 };
 
 /***/ }),
@@ -13343,8 +13340,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_NoteItem__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_NoteItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_NoteItem__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Notes__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Notes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Notes__);
 //
 //
 //
@@ -13355,7 +13352,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = {
     name: 'notes',
-    components: { NoteItem: __WEBPACK_IMPORTED_MODULE_0__components_NoteItem___default.a }
+    components: { Notes: __WEBPACK_IMPORTED_MODULE_0__components_Notes___default.a }
 };
 
 /***/ }),
@@ -13482,12 +13479,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__user_app_Journal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__user_app_Journal__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_app_Notes__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_app_Notes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__user_app_Notes__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__user_app_500__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__user_app_500___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__user_app_500__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__user_app_404__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__user_app_404___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__user_app_404__);
 // Vue Components
 
 
 
 
 // Views
+
+
 
 
 
@@ -13519,6 +13522,14 @@ var routes = [{
     path: '/notes',
     name: 'Notes',
     component: __WEBPACK_IMPORTED_MODULE_7__user_app_Notes___default.a
+}, {
+    path: '/error',
+    name: '500',
+    component: __WEBPACK_IMPORTED_MODULE_8__user_app_500___default.a
+}, {
+    path: '*',
+    name: '404',
+    component: __WEBPACK_IMPORTED_MODULE_9__user_app_404___default.a
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
@@ -15990,13 +16001,7 @@ exports = module.exports = __webpack_require__(5)();
 exports.push([module.i, "\n#user-app-container > #page-content {\n  margin: 0;\n  padding: 10px 20px;\n  -webkit-transition: margin 300ms;\n  transition: margin 300ms;\n}\n@media (min-width: 768px) {\n#user-app-container > #page-content {\n    margin-left: 250px;\n}\n}\n", ""]);
 
 /***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(5)();
-exports.push([module.i, "\n.note-item { float: left;\n}\n", ""]);
-
-/***/ }),
+/* 63 */,
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20462,70 +20467,34 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('draggable', {
-    on: {
-      "start": function($event) {
-        _vm.drag = true
-      },
-      "end": function($event) {
-        _vm.drag = false
-      }
-    },
-    model: {
-      value: (_vm.notes),
-      callback: function($$v) {
-        _vm.notes = $$v
-      },
-      expression: "notes"
+  return _c('div', {
+    staticClass: "note-item",
+    attrs: {
+      "id": 'note-item-' + _vm.note.id
     }
-  }, _vm._l((_vm.notes), function(note, index) {
-    return _c('div', {
-      staticClass: "note-item",
-      attrs: {
-        "id": 'note-item-' + index
+  }, [_c('editable', {
+    staticClass: "note-item-title",
+    attrs: {
+      "id": 'note-title-' + _vm.note.id,
+      "content": _vm.note.title
+    },
+    on: {
+      "update": function($event) {
+        _vm.text = $event
       }
-    }, [_c('textarea', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (note.title),
-        expression: "note.title"
-      }],
-      staticClass: "note-item-title",
-      attrs: {
-        "id": 'note-title-' + index
-      },
-      domProps: {
-        "value": (note.title)
-      },
-      on: {
-        "input": function($event) {
-          if ($event.target.composing) { return; }
-          note.title = $event.target.value
-        }
+    }
+  }), _vm._v(" "), _c('editable', {
+    staticClass: "note-item-content",
+    attrs: {
+      "id": 'note-content-' + _vm.note.id,
+      "content": _vm.note.content
+    },
+    on: {
+      "update": function($event) {
+        _vm.text = $event
       }
-    }), _vm._v(" "), _c('textarea', {
-      directives: [{
-        name: "model",
-        rawName: "v-model",
-        value: (note.content),
-        expression: "note.content"
-      }],
-      staticClass: "note-item-content",
-      attrs: {
-        "id": 'note-content-' + index
-      },
-      domProps: {
-        "value": (note.content)
-      },
-      on: {
-        "input": function($event) {
-          if ($event.target.composing) { return; }
-          note.content = $event.target.value
-        }
-      }
-    })])
-  }))
+    }
+  })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -20777,19 +20746,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('li', [_c('a', {
     attrs: {
-      "href": "/app/#/dashboard"
+      "href": "/app#/dashboard"
     }
   }, [_vm._v("Dashboard")])]), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
-      "href": "/app/#/calendar"
+      "href": "/app#/calendar"
     }
   }, [_vm._v("Calendar")])]), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
-      "href": "/app/#/todo-list"
+      "href": "/app#/todo-list"
     }
   }, [_vm._v("To Do List")])]), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
-      "href": "/app/#/notes"
+      "href": "/app#/notes"
     }
   }, [_vm._v("Notes")])])])])
 }]}
@@ -20899,7 +20868,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "section"
-  }, [_c('NoteItem')], 1)
+  }, [_c('Notes')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -23466,32 +23435,7 @@ if(false) {
 }
 
 /***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(63);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(6)("23a7d28a", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1fbbc3b4!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NoteItem.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1fbbc3b4!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NoteItem.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
+/* 88 */,
 /* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33283,6 +33227,302 @@ module.exports = g;
 __webpack_require__(16);
 module.exports = __webpack_require__(17);
 
+
+/***/ }),
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(5)();
+exports.push([module.i, "\n.note-item {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  border: 1px solid #d3e0e9;\n  background: rgba(211, 224, 233, 0.25);\n  min-width: 250px;\n  min-height: 250px;\n  width: auto;\n  height: auto;\n  margin: 5px;\n  padding: 5px 10px;\n  border-radius: 4px;\n  font-size: 12px;\n}\n.note-item .note-item-title,\n.note-item .note-item-content {\n  background: transparent;\n  display: block;\n  border: none;\n  outline: none;\n  width: 100%;\n  cursor: text;\n  overflow: hidden;\n  resize: none;\n  padding: 5px;\n}\n.note-item .note-item-title {\n  font-weight: bold;\n  font-size: 1.5em;\n  padding-bottom: 7px;\n  border-bottom: 1px solid transparent;\n}\n.note-item .note-item-content {\n  -webkit-box-flex: 1;\n      -ms-flex: 1;\n          flex: 1;\n  height: 100%;\n  font-size: 1.2em;\n}\n.note-item .note-item-title:hover,\n.note-item .note-item-title:focus,\n.note-item .note-item-title:active {\n  border-color: #ccd0d2;\n}\n", ""]);
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(106);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("3b915c68", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1fbbc3b4!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NoteItem.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1fbbc3b4!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NoteItem.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 108 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuedraggable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_NoteItem__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_NoteItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_NoteItem__);
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    components: { draggable: __WEBPACK_IMPORTED_MODULE_0_vuedraggable___default.a, NoteItem: __WEBPACK_IMPORTED_MODULE_1__components_NoteItem___default.a },
+    data: function data() {
+        return {
+            notes: [{
+                id: 22345,
+                type: 0,
+                title: 'note1',
+                content: 'The contents of note1'
+            }, {
+                id: 22346,
+                type: 0,
+                title: 'note2',
+                content: 'The contents of note2'
+            }]
+        };
+    }
+};
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(108),
+  /* template */
+  __webpack_require__(110),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/luke/projects/mymemory/resources/assets/js/components/Notes.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Notes.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7e3d8ce0", Component.options)
+  } else {
+    hotAPI.reload("data-v-7e3d8ce0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('draggable', {
+    staticClass: "note-items-container",
+    on: {
+      "start": function($event) {
+        _vm.drag = true
+      },
+      "end": function($event) {
+        _vm.drag = false
+      }
+    },
+    model: {
+      value: (_vm.note),
+      callback: function($$v) {
+        _vm.note = $$v
+      },
+      expression: "note"
+    }
+  }, _vm._l((_vm.notes), function(note, index) {
+    return _c('NoteItem', {
+      key: note.id,
+      attrs: {
+        "note": note,
+        "index": index
+      }
+    })
+  }))
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7e3d8ce0", module.exports)
+  }
+}
+
+/***/ }),
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    name: '404'
+};
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(114),
+  /* template */
+  __webpack_require__(116),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/luke/projects/mymemory/resources/assets/js/user-app/_404.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] _404.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6cdbcaf1", Component.options)
+  } else {
+    hotAPI.reload("data-v-6cdbcaf1", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "section"
+  }, [_vm._v("\n    Not Found :(\n")])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6cdbcaf1", module.exports)
+  }
+}
+
+/***/ }),
+/* 117 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    name: '500'
+};
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(117),
+  /* template */
+  __webpack_require__(119),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/luke/projects/mymemory/resources/assets/js/user-app/_500.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] _500.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-bcecafa4", Component.options)
+  } else {
+    hotAPI.reload("data-v-bcecafa4", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "section"
+  }, [_vm._v("\n    500 Error!\n")])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-bcecafa4", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
