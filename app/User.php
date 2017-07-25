@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected static function generateAPIString() {
+        // generate random string.
+        // check the database for that random string
+        // if it exists already, create a new one (loop with max num of runs)
+        // return a unique api key once one is created.
+    }
 }

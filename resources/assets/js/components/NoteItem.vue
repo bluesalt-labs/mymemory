@@ -1,7 +1,7 @@
 <template>
-    <div class="note-item" :id="'note-item-' + note.id">
-        <editable class="note-item-title" :id="'note-title-' + note.id" :content="note.title" @update="text = $event"></editable>
-        <editable class="note-item-content" :id="'note-content-' + note.id" :content="note.content" @update="text = $event"></editable>
+    <div class="note-item">
+        <editable class="note-item-title" :id="'note-title-' + noteid" :content="title" @update="text = $event"></editable>
+        <editable class="note-item-content" :id="'note-content-' + noteid" :content="content" @update="text = $event"></editable>
     </div>
 </template>
 
@@ -10,24 +10,48 @@
     export default {
         components: {
             editable: {
-                template: '<div contenteditable="true" aria-multiline="true" role="textbox" spellcheck="true" @input="update" @click="onEditableClick"></div>',
-                props: ['value'],
+                template: '<div contenteditable="true" aria-multiline="true" role="textbox" spellcheck="true" @input="update"><!--@mousedown="editMouseDown" @mouseup="editMouseUp"-->{{ content }}</div>',
+                props: ['content'],
+                /*
                 mounted: function() {
-                    this.$el.innerText = this.value;
+                    this.$el.innerText = this.content;
                 },
+                */
                 methods: {
-                    update: function(event) {
-                        this.$emit('update', event.target.innerText);
+                    update: function(e) {
+                        this.$emit('update', e.target.innerHTML);
                     },
-                    onEditableClick: function(e) {
+                    editMouseDown: function(e) {
+                        e.target.parentElement.draggable = false;
                         e.target.focus();
-                        console.log('focusing on #' + e.target.id); // debug
+                    },
+                    editMouseUp: function(e) {
+                        e.target.parentElement.draggable = true;
                     }
                 }
             }
         },
-        props: ['note'],
-        methods: {}
+        props: {
+            index: {
+                type: Number,
+                required: true
+            },
+            noteid: Number,
+            title: {
+                type: String,
+                default: ''
+            },
+            content: {
+                type: String,
+                default: ''
+            }
+        },
+        methods: {
+            update: function(e) {
+                console.log(e); // debug
+                //this.$emit('update', e.target.innerHTML);
+            },
+        }
     };
 </script>
 

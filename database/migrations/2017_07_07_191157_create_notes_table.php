@@ -17,8 +17,10 @@ class CreateNotesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('type');
+            $table->integer('parent_id');
             $table->string('title');
             $table->string('content');
+            $table->boolean('archived');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateNotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todos');
+        Schema::dropIfExists('notes');
     }
 }

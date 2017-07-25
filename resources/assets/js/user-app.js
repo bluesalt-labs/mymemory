@@ -1,5 +1,4 @@
 // Vue Components
-import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserApp from './user-app/App'
 

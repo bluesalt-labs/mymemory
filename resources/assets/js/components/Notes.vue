@@ -1,7 +1,16 @@
 <template>
-    <draggable class="note-items-container" @start="drag=true" @end="drag=false" v-model="note">
-        <NoteItem v-for="(note, index) in notes" v-bind:note="note" v-bind:index="index" v-bind:key="note.id"></NoteItem>
+    <!--<div class="note-items-container">-->
+    <draggable class="note-items-container" @start="drag=true" @end="drag=false">
+        <NoteItem v-for="(note, index) in notes"
+                  :title="note.title"
+                  :content="note.content"
+                  :id="'note-item-' + note.id"
+                  :index="index"
+                  :noteid="note.id"
+                  :key="note.id"
+                  v-model="note.id"></NoteItem>
     </draggable>
+    <!--</div>-->
 </template>
 
 <script type="text/babel">
