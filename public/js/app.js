@@ -13347,10 +13347,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ToDoList__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ToDoList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_ToDoList__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Calendar__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Calendar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Calendar__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NoteItem__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_NoteItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_NoteItem__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Journal__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Journal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Journal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Calendar__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Calendar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Calendar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_NoteItem__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_NoteItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_NoteItem__);
 //
 //
 //
@@ -13370,6 +13372,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
@@ -13377,7 +13385,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = {
     name: 'dashboard',
-    components: { ToDoList: __WEBPACK_IMPORTED_MODULE_0__components_ToDoList___default.a, Calendar: __WEBPACK_IMPORTED_MODULE_1__components_Calendar___default.a, NoteItem: __WEBPACK_IMPORTED_MODULE_2__components_NoteItem___default.a }
+    components: { ToDoList: __WEBPACK_IMPORTED_MODULE_0__components_ToDoList___default.a, Journal: __WEBPACK_IMPORTED_MODULE_1__components_Journal___default.a, Calendar: __WEBPACK_IMPORTED_MODULE_2__components_Calendar___default.a, NoteItem: __WEBPACK_IMPORTED_MODULE_3__components_NoteItem___default.a }
 };
 
 /***/ }),
@@ -13428,6 +13436,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -20769,7 +20778,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('li', [_c('a', {
       attrs: {
-        "href": "#"
+        "role": "button"
       },
       on: {
         "click": function($event) {
@@ -20783,7 +20792,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _vm._v("Task")])]), _vm._v(" "), _c('li', [_c('a', {
       attrs: {
-        "href": "#"
+        "role": "button"
       },
       on: {
         "click": function($event) {
@@ -20797,7 +20806,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _vm._v("Task Complete")])]), _vm._v(" "), _c('li', [_c('a', {
       attrs: {
-        "href": "#"
+        "role": "button"
       },
       on: {
         "click": function($event) {
@@ -20811,7 +20820,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _vm._v("Task Migrated")])]), _vm._v(" "), _c('li', [_c('a', {
       attrs: {
-        "href": "#"
+        "role": "button"
       },
       on: {
         "click": function($event) {
@@ -20825,7 +20834,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _vm._v("Task Scheduled")])]), _vm._v(" "), _c('li', [_c('a', {
       attrs: {
-        "href": "#"
+        "role": "button"
       },
       on: {
         "click": function($event) {
@@ -20839,7 +20848,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _vm._v("Event")])]), _vm._v(" "), _c('li', [_c('a', {
       attrs: {
-        "href": "#"
+        "role": "button"
       },
       on: {
         "click": function($event) {
@@ -20952,6 +20961,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "/app#/dashboard"
     }
   }, [_vm._v("Dashboard")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "/app#/journal"
+    }
+  }, [_vm._v("Journal")])]), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
       "href": "/app#/calendar"
     }
@@ -21111,6 +21124,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "section"
   }, [_c('h1', [_vm._v("To Do List")]), _vm._v(" "), _c('ToDoList')], 1), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
+    staticClass: "section"
+  }, [_c('h1', [_vm._v("Journal")]), _vm._v(" "), _c('Journal')], 1), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
     staticClass: "section"
   }, [_c('h1', [_vm._v("Calendar")]), _vm._v(" "), _c('Calendar')], 1), _vm._v(" "), _c('hr'), _vm._v(" "), _c('div', {
     staticClass: "section"
@@ -33532,6 +33547,86 @@ module.exports = g;
 __webpack_require__(16);
 module.exports = __webpack_require__(17);
 
+
+/***/ }),
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    data: function data() {
+        return {};
+    }
+};
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(115),
+  /* template */
+  __webpack_require__(117),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/luke/projects/mymemory/resources/assets/js/components/Journal.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Journal.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3b15c574", Component.options)
+  } else {
+    hotAPI.reload("data-v-3b15c574", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('code', [_vm._v("#todo")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3b15c574", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -6,6 +6,11 @@
         </div>
         <hr />
         <div class="section">
+            <h1>Journal</h1>
+            <Journal></Journal>
+        </div>
+        <hr />
+        <div class="section">
             <h1>Calendar</h1>
             <Calendar></Calendar>
         </div>
@@ -19,11 +24,12 @@
 
 <script type="text/javascript">
     import ToDoList from '../components/ToDoList'
+    import Journal from '../components/Journal'
     import Calendar from '../components/Calendar'
     import NoteItem from '../components/NoteItem'
 
     export default {
         name: 'dashboard',
-        components: { ToDoList, Calendar, NoteItem }
+        components: { ToDoList, Journal, Calendar, NoteItem }
     }
 </script>

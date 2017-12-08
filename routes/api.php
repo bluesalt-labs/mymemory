@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::group(['middleware' => 'auth:api'], function() {
-    Route::get('/user', function (Request $request) {
-        return Auth::user();
+Route::group(['middleware' => 'auth:api', 'prefix' => 'user'], function() {
+    Route::get('/', function (Request $request) {
+        //return Auth::user();
+        return $request->session()->get('key');
+    });
+});
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'todo_list'], function() {
+    Route::get('/', function (Request $request) {
+
     });
 });
 

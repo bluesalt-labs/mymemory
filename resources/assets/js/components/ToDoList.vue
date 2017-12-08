@@ -12,12 +12,12 @@
                             <span class="fa" v-html="todoListTypes[item.type].html"></span>
                         </button>
                         <ul class="dropdown-menu" :aria-labelledby="'item-' + index + '-type'">
-                            <li><a href="#" @click="todoSetType(index, 0)"><i class="fa fa-circle" aria-hidden="true"></i>Task</a></li>
-                            <li><a href="#" @click="todoSetType(index, 1)"><i class="fa fa-times" aria-hidden="true"></i>Task Complete</a></li>
-                            <li><a href="#" @click="todoSetType(index, 2)"><i class="fa fa-angle-right" aria-hidden="true"></i>Task Migrated</a></li>
-                            <li><a href="#" @click="todoSetType(index, 3)"><i class="fa fa-angle-left" aria-hidden="true"></i>Task Scheduled</a></li>
-                            <li><a href="#" @click="todoSetType(index, 4)"><i class="fa fa-circle-o" aria-hidden="true"></i>Event</a></li>
-                            <li><a href="#" @click="todoSetType(index, 5)"><i class="fa fa-minus" aria-hidden="true"></i>Note</a></li>
+                            <li><a role="button" @click="todoSetType(index, 0)"><i class="fa fa-circle" aria-hidden="true"></i>Task</a></li>
+                            <li><a role="button" @click="todoSetType(index, 1)"><i class="fa fa-times" aria-hidden="true"></i>Task Complete</a></li>
+                            <li><a role="button" @click="todoSetType(index, 2)"><i class="fa fa-angle-right" aria-hidden="true"></i>Task Migrated</a></li>
+                            <li><a role="button" @click="todoSetType(index, 3)"><i class="fa fa-angle-left" aria-hidden="true"></i>Task Scheduled</a></li>
+                            <li><a role="button" @click="todoSetType(index, 4)"><i class="fa fa-circle-o" aria-hidden="true"></i>Event</a></li>
+                            <li><a role="button" @click="todoSetType(index, 5)"><i class="fa fa-minus" aria-hidden="true"></i>Note</a></li>
                         </ul>
                     </div>
                 </div>
