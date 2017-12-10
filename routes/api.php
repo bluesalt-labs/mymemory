@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'user'], function() {
     Route::get('/', function (Request $request) {
-        //return Auth::user();
-        return $request->session()->get('key');
+        return Auth::user();
+        //return $request->session()->get('key');
     });
 });
 

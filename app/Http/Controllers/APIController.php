@@ -13,7 +13,7 @@ class APIController extends Controller
      */
     public function index()
     {
-
+        return json_encode(["test!"]);
     }
 
     /**
